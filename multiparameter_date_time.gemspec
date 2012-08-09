@@ -4,8 +4,7 @@ require File.expand_path('../lib/multiparameter_date_time/version', __FILE__)
 Gem::Specification.new do |gem|
   gem.authors       = ["Case Commons, LLC", "Grant Hutchins", "Trace Wax"]
   gem.email         = ["casecommons-dev@googlegroups.com", "gems@nertzy.com", "gems@tracedwax.com"]
-  gem.description   = %q{TODO: Write a gem description}
-  gem.summary       = %q{TODO: Write a gem summary}
+  gem.summary       = "Set a DateTime via two accessors, one for the date, one for the time"
   gem.homepage      = "https://github.com/Casecommons/multiparameter_date_time"
 
   gem.files         = `git ls-files`.split($\)
@@ -14,4 +13,12 @@ Gem::Specification.new do |gem|
   gem.name          = "multiparameter_date_time"
   gem.require_paths = ["lib"]
   gem.version       = MultiparameterDateTime::VERSION
+
+  gem.add_dependency "american_date"
+
+  gem.add_development_dependency 'activerecord'
+  gem.add_development_dependency 'activesupport'
+  gem.add_development_dependency 'rspec', '~> 2.11'
+  gem.add_development_dependency 'with_model', "~> 0.3"
+  gem.add_development_dependency 'informal', "~> 0.0.3"
 end
