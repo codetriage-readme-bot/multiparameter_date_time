@@ -1,5 +1,6 @@
 require "active_support/concern"
 require "american_date"
+require 'is_valid_multiparameter_date_time_validator'
 
 module MultiparameterDateTime
   extend ActiveSupport::Concern
