@@ -52,6 +52,14 @@ record.publish_at_date_part #=> nil
 record.publish_at_time_part #=> "09:30 am"
 ````
 
+## Configuring the date and time formats
+In config/initializers/multiparameter\_date\_time.rb:
+
+````ruby
+MultiparameterDateTime.date_format = "%-m/%-d/%Y"
+MultiparameterDateTime.time_format = "%-I:%M %P"
+````
+
 ## Contributing
 
 1. Fork it

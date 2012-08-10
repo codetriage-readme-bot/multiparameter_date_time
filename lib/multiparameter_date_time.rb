@@ -7,6 +7,19 @@ module MultiparameterDateTime
   VALID_TIME_FORMAT = /\A\d?\d:\d{2}(:\d{2})?\s*([ap]m)?\s*([A-Z]{3,5})?\Z/
   VALID_DATE_FORMAT = /\A\d?\d\/\d?\d\/\d{4}|(\d{4}-\d{2}-\d{2})\Z/
 
+  DEFAULT_DATE_FORMAT = "%-m/%-d/%Y"
+  DEFAULT_TIME_FORMAT = "%-I:%M %P"
+
+  mattr_writer :date_format, :time_format
+
+  def self.date_format
+    @@date_format ||= DEFAULT_DATE_FORMAT
+  end
+
+  def self.time_format
+    @@time_format ||= DEFAULT_TIME_FORMAT
+  end
+
   module ClassMethods
     def multiparameter_date_time(attribute_name)
       date_attribute = :"#{attribute_name}_date_part"
@@ -60,7 +73,7 @@ module MultiparameterDateTime
           time = public_send(attribute_name)
           return nil if time.nil? || time == :incomplete
 
-          time.strftime("%-I:%M %P")
+          time.strftime(MultiparameterDateTime.time_format)
         end
       end
 
@@ -70,7 +83,7 @@ module MultiparameterDateTime
         else
           date = public_send(attribute_name)
           return nil if date.nil? || date == :incomplete
-          date.strftime("%-m/%-d/%Y")
+          date.strftime(MultiparameterDateTime.date_format)
         end
       end
     end

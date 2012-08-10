@@ -344,6 +344,47 @@ describe MultiparameterDateTime do
             subject.foo_time_part.should == "12:00 am"
           end
         end
+
+        describe "configuring the datetime format" do
+          let(:record) { model.new(foo: Time.zone.parse("01/09/2000 1:30 pm")) }
+
+          context "when the date format is set" do
+            before do
+              MultiparameterDateTime.date_format = "%-m-%-e-%y"
+            end
+
+            it "should format the date properly" do
+              subject.foo_date_part.should == "1-9-00"
+            end
+
+            it "should use the default format for the time" do
+              subject.foo_time_part.should == "1:30 pm"
+            end
+
+            after do
+              MultiparameterDateTime.date_format = MultiparameterDateTime::DEFAULT_DATE_FORMAT
+            end
+          end
+
+          context "when the time format is set" do
+            before do
+              MultiparameterDateTime.time_format = "%H%M hours"
+            end
+
+            it "should format the time properly" do
+              subject.foo_time_part.should == "1330 hours"
+            end
+
+            it "should use the default format for the date" do
+              subject.foo_date_part.should == "1/9/2000"
+            end
+
+            after do
+              MultiparameterDateTime.time_format = MultiparameterDateTime::DEFAULT_TIME_FORMAT
+            end
+          end
+
+        end
       end
     end
   end
