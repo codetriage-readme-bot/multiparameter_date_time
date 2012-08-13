@@ -6,7 +6,7 @@ module MultiparameterDateTime
   extend ActiveSupport::Concern
 
   VALID_TIME_FORMAT = /\A\d?\d:\d{2}(:\d{2})?\s*([ap]m)?\s*([A-Z]{3,5})?\Z/
-  VALID_DATE_FORMAT = /\A((\d{1,2}[\/\-.]\d{1,2}[\/\-.]\d{2,4})|(\d{4}-\d{2}-\d{2}))\Z/
+  VALID_DATE_FORMAT = /\A((\d{1,2}[\/\-.]\d{1,2}[\/\-.]\d{2,4})|(\d{4}-\d{1,2}-\d{1,2}))/
 
   DEFAULT_DATE_FORMAT = "%-m/%-d/%Y"
   DEFAULT_TIME_FORMAT = "%-I:%M %P"
