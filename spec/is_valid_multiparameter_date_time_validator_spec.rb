@@ -234,4 +234,20 @@ describe IsValidMultiparameterDateTimeValidator do
     end
   end
 
+  context "accepts dates in a variety of formats" do
+    ["02-01-1971", "4/4/92", "01/02/2001", "01/02/2001", "01.02.2011"].each do |format|
+      context format do
+        let(:date_string) { format }
+        let(:time_string) { "12:00am" }
+        let(:record) do
+          ModelWithDatetime.new(foo_date_part: date_string, foo_time_part: time_string)
+        end
+
+        it "should be accepted" do
+          record.should be_valid
+        end
+      end
+    end
+  end
+
 end
