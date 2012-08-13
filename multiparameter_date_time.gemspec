@@ -2,8 +2,8 @@
 require File.expand_path('../lib/multiparameter_date_time/version', __FILE__)
 
 Gem::Specification.new do |gem|
-  gem.authors       = ["Case Commons, LLC", "Grant Hutchins", "Trace Wax"]
-  gem.email         = ["casecommons-dev@googlegroups.com", "gems@nertzy.com", "gems@tracedwax.com"]
+  gem.authors       = ["Case Commons, LLC", "Grant Hutchins", "Trace Wax", "Jason Berlinsky"]
+  gem.email         = ["casecommons-dev@googlegroups.com", "gems@nertzy.com", "gems@tracedwax.com", "jason@jasonberlinsky.com"]
   gem.summary       = "Set a DateTime via two accessors, one for the date, one for the time"
   gem.homepage      = "https://github.com/Casecommons/multiparameter_date_time"
 
