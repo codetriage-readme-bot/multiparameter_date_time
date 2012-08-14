@@ -6,6 +6,10 @@ Set a DateTime via two accessors, one for the date, one for the time
 [![Dependency Status](https://gemnasium.com/Casecommons/multiparameter_date_time.png)](https://gemnasium.com/Casecommons/multiparameter_date_time)
 [![Code Climate](https://codeclimate.com/badge.png)](https://codeclimate.com/github/Casecommons/multiparameter_date_time)
 
+## Requirements
+
+ * Ruby 1.9
+
 ## Installation
 
 Add this line to your application's Gemfile:
