@@ -14,6 +14,8 @@ Gem::Specification.new do |gem|
   gem.require_paths = ["lib"]
   gem.version       = MultiparameterDateTime::VERSION
 
+  gem.required_ruby_version = '>= 1.9.2'
+
   gem.add_dependency "american_date"
 
   gem.add_development_dependency 'activerecord'
