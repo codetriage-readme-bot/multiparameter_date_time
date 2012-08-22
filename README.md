@@ -74,6 +74,11 @@ MultiparameterDateTime.time_format = "%-I:%M %P"
 validates :published_at, presence: true, is_valid_multiparameter_date_time: true
 ````
 
+### Accessing the datetime error message used
+
+````ruby
+IsValidMultiparameterDateTimeValidator.invalid_format_error_message
+````
 
 ## Contributing
 

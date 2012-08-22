@@ -234,7 +234,7 @@ describe IsValidMultiparameterDateTimeValidator do
     end
   end
 
-  context "accepts dates in a variety of formats" do
+  describe "accepts dates in a variety of formats" do
     ["2010-1-1", "02-01-1971", "4/4/92", "01/02/2001", "01/02/2001", "01.02.2011"].each do |format|
       context format do
         let(:date_string) { format }
@@ -250,4 +250,12 @@ describe IsValidMultiparameterDateTimeValidator do
     end
   end
 
+  describe ".invalid_format_error_message" do
+    subject { IsValidMultiparameterDateTimeValidator.invalid_format_error_message }
+
+    it do
+      should ==
+        "Please enter a valid date and time using the following formats: 1/29/2000, 5:15 pm"
+    end
+  end
 end

@@ -14,7 +14,7 @@ class IsValidMultiparameterDateTimeValidator < ActiveModel::EachValidator
     end
 
     if date_invalid || time_invalid
-      record.errors.add(attribute, invalid_format_error_message)
+      record.errors.add(attribute, self.class.invalid_format_error_message)
     elsif date_value.blank?
       record.errors.add(attribute, "Please enter a date.")
     elsif time_value.blank?
@@ -25,14 +25,12 @@ class IsValidMultiparameterDateTimeValidator < ActiveModel::EachValidator
         Time.zone.parse("#{date_value} #{time_value}")
         Time.zone.parse(attribute_value)
       rescue ArgumentError
-        record.errors.add(attribute, invalid_format_error_message)
+        record.errors.add(attribute, self.class.invalid_format_error_message)
       end
     end
   end
 
-  private
-
-  def invalid_format_error_message
+  def self.invalid_format_error_message
     date_time = Time.zone.parse("1/29/2000 5:15pm")
     date_string = date_time.strftime(MultiparameterDateTime.date_format)
     time_string = date_time.strftime(MultiparameterDateTime.time_format)
