@@ -5,8 +5,9 @@ require 'is_valid_multiparameter_date_time_validator'
 module MultiparameterDateTime
   extend ActiveSupport::Concern
 
-  VALID_TIME_FORMAT = /\A\d?\d:\d{2}(:\d{2})?\s*([ap]m)?\s*([A-Z]{3,5})?\Z/
   VALID_DATE_FORMAT = /\A((\d{1,2}[\/\-.]\d{1,2}[\/\-.]\d{2,4})|(\d{4}-\d{1,2}-\d{1,2}))/
+  VALID_STANDARD_TIME_FORMAT = /\A[0]*([1-9]|1[0-2]):\d{2}(:\d{2})?\s*([apAP][mM])?\s*([A-Z]{3,5})?\Z/
+  VALID_MILITARY_TIME_FORMAT = /\A[0]*([0-9]|1[0-9]|2[0-3]):\d{2}(:\d{2})?\s*([A-Z]{3,5})?\Z/
 
   DEFAULT_DATE_FORMAT = "%-m/%-d/%Y"
   DEFAULT_TIME_FORMAT = "%-I:%M %P"
@@ -93,7 +94,7 @@ module MultiparameterDateTime
   private
 
   def set_combined_datetime(name, date_string, time_string)
-    if date_string =~ MultiparameterDateTime::VALID_DATE_FORMAT && time_string =~ MultiparameterDateTime::VALID_TIME_FORMAT
+    if date_string =~ MultiparameterDateTime::VALID_DATE_FORMAT && (time_string =~ MultiparameterDateTime::VALID_STANDARD_TIME_FORMAT || time_string =~ VALID_MILITARY_TIME_FORMAT)
       begin
         write_attribute_for_multiparameter_date_time(
           name, Time.zone.parse("#{date_string} #{time_string}")

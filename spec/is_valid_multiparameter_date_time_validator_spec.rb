@@ -22,6 +22,18 @@ describe IsValidMultiparameterDateTimeValidator do
     end
   end
 
+  shared_examples_for "a valid time" do
+    it "should not have an error" do
+      record.errors[:foo].should be_empty
+    end
+  end
+
+  shared_examples_for "a badly formatted date or time" do
+    it "should show the bad format error" do
+      record.errors[:foo].should == [bad_format_error]
+    end
+  end
+
   describe "#validate_each" do
     subject { record }
     let(:record) do
@@ -42,18 +54,72 @@ describe IsValidMultiparameterDateTimeValidator do
     context "with valid date" do
       let(:date_string) { "01/01/2001" }
 
-      context "with valid time" do
-        let(:time_string) { "12:31pm" }
-        it "should not have an error" do
-          record.errors[:foo].should be_empty
+      context "with valid time in" do
+        context "military format" do
+          context "lots of zeros" do
+            let(:time_string) { "00:00" }
+            it_should_behave_like "a valid time"
+          end
+
+          context "last valid value" do
+            let(:time_string){ "23:59" }
+            it_should_behave_like "a valid time"
+          end
+
+          context "1 pm" do
+            let(:time_string){ "13:00" }
+            it_should_behave_like "a valid time"
+          end
+        end
+
+        context "standard format" do
+          let(:time_string) { "12:31pm" }
+          it_should_behave_like "a valid time"
+
+          context "with a capital AM or PM" do
+            let(:time_string) { "12:31 PM" }
+            it_should_behave_like "a valid time"
+          end
+
+          context "without a space between the time and AM or PM" do
+            let(:time_string) { "12:31AM" }
+            it_should_behave_like "a valid time"
+          end
+
+          context "with no space and a mixed case aM or pM" do
+            let(:time_string) { "12:31aM" }
+            it_should_behave_like "a valid time"
+          end
+
+          context "with a space and a mixed case aM or pM" do
+            let(:time_string) { "12:31 aM" }
+            it_should_behave_like "a valid time"
+          end
+
+          context "with a space and a lower case am or pm" do
+            let(:time_string) { "12:31 am" }
+            it_should_behave_like "a valid time"
+          end
         end
       end
 
-      context "with invalid time" do
-        let(:time_string) { "asdf" }
+      context "with invalid time in" do
+        context "military format" do
+          context "above 23:59" do
+            let(:time_string) { "25:00" }
+            it_should_behave_like "a badly formatted date or time"
+          end
 
-        it "should show the bad format error" do
-          record.errors[:foo].should == [bad_format_error]
+          context "with am or pm" do
+            let(:time_string) { "23:00 am" }
+            it_should_behave_like "a badly formatted date or time"
+          end
+        end
+
+        context "standard format" do
+          let(:time_string) { "90:00pm" }
+
+          it_should_behave_like "a badly formatted date or time"
         end
       end
 
@@ -73,25 +139,19 @@ describe IsValidMultiparameterDateTimeValidator do
       context "with valid time" do
         let(:time_string) { "12:31pm" }
 
-        it "should show the bad format error" do
-          record.errors[:foo].should == [bad_format_error]
-        end
+        it_should_behave_like "a badly formatted date or time"
       end
 
       context "with invalid time" do
         let(:time_string) { "asdf" }
 
-        it "should show the bad format error" do
-          record.errors[:foo].should == [bad_format_error]
-        end
+        it_should_behave_like "a badly formatted date or time"
       end
 
       [" ", nil].each do |time_value|
         context "with time = #{time_value.inspect}" do
           let(:time_string) { time_value }
-          it "should show the bad format error" do
-            record.errors[:foo].should == [bad_format_error]
-          end
+          it_should_behave_like "a badly formatted date or time"
         end
       end
     end
@@ -111,9 +171,7 @@ describe IsValidMultiparameterDateTimeValidator do
         context "with invalid time" do
           let(:time_string) { "asdf" }
 
-          it "should show the bad format error" do
-            record.errors[:foo].should == [bad_format_error]
-          end
+          it_should_behave_like "a badly formatted date or time"
         end
 
         [" ", nil].each do |time_value|
@@ -154,9 +212,7 @@ describe IsValidMultiparameterDateTimeValidator do
           ModelWithDatetime.new(foo_date_part: "19/19/1919", foo_time_part: "04:50pm")
         end
 
-        it "should show the bad format error" do
-          record.errors[:foo].should == [bad_format_error]
-        end
+        it_should_behave_like "a badly formatted date or time"
       end
 
       context "set directly" do
@@ -164,9 +220,7 @@ describe IsValidMultiparameterDateTimeValidator do
           ModelWithDatetime.new(foo: "19/19/1919 04:50pm")
         end
 
-        it "should show the bad format error" do
-          record.errors[:foo].should == [bad_format_error]
-        end
+        it_should_behave_like "a badly formatted date or time"
       end
     end
 
@@ -176,9 +230,7 @@ describe IsValidMultiparameterDateTimeValidator do
           ModelWithDatetime.new(foo_date_part: "01/01/2001", foo_time_part: "09:99pm")
         end
 
-        it "should show the bad format error" do
-          record.errors[:foo].should == [bad_format_error]
-        end
+        it_should_behave_like "a badly formatted date or time"
       end
 
       context "set directly" do
@@ -186,9 +238,7 @@ describe IsValidMultiparameterDateTimeValidator do
           ModelWithDatetime.new(foo: "01/01/2001 09:99pm")
         end
 
-        it "should show the bad format error" do
-          record.errors[:foo].should == [bad_format_error]
-        end
+        it_should_behave_like "a badly formatted date or time"
       end
     end
 
