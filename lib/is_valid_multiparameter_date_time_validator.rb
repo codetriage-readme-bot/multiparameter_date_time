@@ -5,15 +5,7 @@ class IsValidMultiparameterDateTimeValidator < ActiveModel::EachValidator
 
     return if date_value.blank? && time_value.blank?
 
-    if date_value.present?
-      date_invalid = date_value !~ MultiparameterDateTime::VALID_DATE_FORMAT
-    end
-
-    if time_value.present?
-      time_invalid = time_value !~ MultiparameterDateTime::VALID_TIME_FORMAT
-    end
-
-    if date_invalid || time_invalid
+    if date_invalid?(date_value) || time_invalid?(time_value)
       record.errors.add(attribute, self.class.invalid_format_error_message)
     elsif date_value.blank?
       record.errors.add(attribute, "Please enter a date.")
@@ -36,5 +28,19 @@ class IsValidMultiparameterDateTimeValidator < ActiveModel::EachValidator
     time_string = date_time.strftime(MultiparameterDateTime.time_format)
 
     "Please enter a valid date and time using the following formats: #{date_string}, #{time_string}"
+  end
+
+  def time_invalid?(time_value)
+    if time_value.present?
+      time_invalid_standard = time_value !~ MultiparameterDateTime::VALID_STANDARD_TIME_FORMAT 
+      time_invalid_military = time_value !~ MultiparameterDateTime::VALID_MILITARY_TIME_FORMAT 
+      time_invalid_standard && time_invalid_military 
+    end
+  end
+  
+  def date_invalid?(date_value)
+    if date_value.present?
+      date_invalid = date_value !~ MultiparameterDateTime::VALID_DATE_FORMAT
+    end
   end
 end
