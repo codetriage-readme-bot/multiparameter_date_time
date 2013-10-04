@@ -27,7 +27,7 @@ Or install it yourself as:
 
 ## Usage
 
-````ruby
+```ruby
 class Article < ActiveRecord::Base
   include MultiparameterDateTime
 
@@ -59,27 +59,27 @@ record = Article.new(
 record.publish_at #=> :incomplete
 record.publish_at_date_part #=> nil
 record.publish_at_time_part #=> "09:30 am"
-````
+```
 
 ### Configuring the date and time formats
 In config/initializers/multiparameter\_date\_time.rb:
 
-````ruby
+```ruby
 MultiparameterDateTime.date_format = "%-m/%-d/%Y"
 MultiparameterDateTime.time_format = "%-I:%M %P"
-````
+```
 
 ### Validating the multipart date time data
 
-````ruby
+```ruby
 validates :published_at, presence: true, is_valid_multiparameter_date_time: true
-````
+```
 
 ### Accessing the datetime error message used
 
-````ruby
+```ruby
 IsValidMultiparameterDateTimeValidator.invalid_format_error_message
-````
+```
 
 ## Contributing
 
