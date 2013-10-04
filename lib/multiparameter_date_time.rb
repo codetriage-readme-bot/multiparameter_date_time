@@ -1,5 +1,5 @@
-require "active_support/concern"
-require "american_date"
+require 'active_support/concern'
+require 'american_date'
 require 'is_valid_multiparameter_date_time_validator'
 
 module MultiparameterDateTime
@@ -9,8 +9,8 @@ module MultiparameterDateTime
   VALID_STANDARD_TIME_FORMAT = /\A[0]*([1-9]|1[0-2]):\d{2}(:\d{2})?\s*([apAP][mM])?\s*([A-Z]{3,5})?\Z/
   VALID_MILITARY_TIME_FORMAT = /\A[0]*([0-9]|1[0-9]|2[0-3]):\d{2}(:\d{2})?\s*([A-Z]{3,5})?\Z/
 
-  DEFAULT_DATE_FORMAT = "%-m/%-d/%Y"
-  DEFAULT_TIME_FORMAT = "%-I:%M %P"
+  DEFAULT_DATE_FORMAT = '%-m/%-d/%Y'
+  DEFAULT_TIME_FORMAT = '%-I:%M %P'
 
   mattr_writer :date_format, :time_format
 
@@ -40,7 +40,7 @@ module MultiparameterDateTime
           if iso8601
             write_attribute_for_multiparameter_date_time(attribute_name, iso8601)
           else
-            date_part, time_part = date_time_input.split(" ", 2)
+            date_part, time_part = date_time_input.split(' ', 2)
             parsed_date_part = Date.parse(date_part) rescue nil
             if time_part.nil? && parsed_date_part
               write_attribute_for_multiparameter_date_time(

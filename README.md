@@ -33,38 +33,38 @@ class Article < ActiveRecord::Base
 end
 
 record = Article.new(
-  :publish_at_date_part => "01/01/2001",
-  :publish_at_time_part => "4:30 pm"
+  :publish_at_date_part => '01/01/2001',
+  :publish_at_time_part => '4:30 pm'
 )
 
 record.publish_at #=> Mon, 01 Jan 2001 16:30:00 +0000
 
-record.publish_at_date_part = "2/3/2004"
+record.publish_at_date_part = '2/3/2004'
 record.publish_at #=> Tue, 03 Feb 2004 16:30:00 +0000
 
 record = Article.new(
-  :publish_at_date_part => "01/01/2001",
+  :publish_at_date_part => '01/01/2001',
 )
 
 record.publish_at #=> :incomplete
-record.publish_at_date_part #=> "01/01/2001"
+record.publish_at_date_part #=> '01/01/2001'
 record.publish_at_time_part #=> nil
 
 record = Article.new(
-  :publish_at_time_part => "09:30 am",
+  :publish_at_time_part => '09:30 am',
 )
 
 record.publish_at #=> :incomplete
 record.publish_at_date_part #=> nil
-record.publish_at_time_part #=> "09:30 am"
+record.publish_at_time_part #=> '09:30 am'
 ```
 
 ### Configuring the date and time formats
 In config/initializers/multiparameter\_date\_time.rb:
 
 ```ruby
-MultiparameterDateTime.date_format = "%-m/%-d/%Y"
-MultiparameterDateTime.time_format = "%-I:%M %P"
+MultiparameterDateTime.date_format = '%-m/%-d/%Y'
+MultiparameterDateTime.time_format = '%-I:%M %P'
 ```
 
 ### Validating the multipart date time data
