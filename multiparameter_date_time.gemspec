@@ -13,7 +13,7 @@ Gem::Specification.new do |gem|
   gem.name          = 'multiparameter_date_time'
   gem.require_paths = ['lib']
   gem.version       = MultiparameterDateTime::VERSION
-  gem.license       = ['MIT']
+  gem.licenses      = 'MIT'
 
   gem.required_ruby_version = '>= 1.9.2'
 
