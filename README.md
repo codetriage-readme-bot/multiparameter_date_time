@@ -88,3 +88,7 @@ IsValidMultiparameterDateTimeValidator.invalid_format_error_message
 3. Commit your changes (`git commit -am 'Added some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create new Pull Request
+
+## License
+
+Copyright © 2012–2013 Case Commons, LLC. License is available in the LICENSE file.
