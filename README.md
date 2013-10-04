@@ -3,8 +3,8 @@
 Set a DateTime via two accessors, one for the date, one for the time
 
 [![Build Status](https://secure.travis-ci.org/Casecommons/multiparameter_date_time.png?branch=master)](https://travis-ci.org/Casecommons/multiparameter_date_time)
+[![Code Climate](https://codeclimate.com/github/Casecommons/multiparameter_date_time.png)](https://codeclimate.com/github/Casecommons/multiparameter_date_time)
 [![Dependency Status](https://gemnasium.com/Casecommons/multiparameter_date_time.png)](https://gemnasium.com/Casecommons/multiparameter_date_time)
-[![Code Climate](https://codeclimate.com/badge.png)](https://codeclimate.com/github/Casecommons/multiparameter_date_time)
 
 ## Requirements
 
