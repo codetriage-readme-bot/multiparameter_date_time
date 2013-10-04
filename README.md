@@ -7,10 +7,6 @@ Set a DateTime via two accessors, one for the date, one for the time
 [![Gem Version](https://badge.fury.io/rb/multiparameter_date_time.png)](https://rubygems.org/gems/multiparameter_date_time)
 [![Dependency Status](https://gemnasium.com/Casecommons/multiparameter_date_time.png)](https://gemnasium.com/Casecommons/multiparameter_date_time)
 
-## Requirements
-
- * Ruby 1.9
-
 ## Installation
 
 Add this line to your application's Gemfile:
@@ -24,6 +20,8 @@ And then execute:
 Or install it yourself as:
 
     $ gem install multiparameter_date_time
+
+Note that Ruby 1.9.2+ is required.
 
 ## Usage
 
