@@ -9,8 +9,8 @@ module MultiparameterDateTime
   VALID_STANDARD_TIME_FORMAT = /\A[0]*([1-9]|1[0-2]):\d{2}(:\d{2})?\s*([apAP][mM])?\s*([A-Z]{3,5})?\Z/
   VALID_MILITARY_TIME_FORMAT = /\A[0]*([0-9]|1[0-9]|2[0-3]):\d{2}(:\d{2})?\s*([A-Z]{3,5})?\Z/
 
-  DEFAULT_DATE_FORMAT = '%-m/%-d/%Y'
-  DEFAULT_TIME_FORMAT = '%-I:%M %P'
+  DEFAULT_DATE_FORMAT = '%-m/%-d/%0Y'
+  DEFAULT_TIME_FORMAT = '%-I:%0M %P'
 
   mattr_writer :date_format, :time_format
 

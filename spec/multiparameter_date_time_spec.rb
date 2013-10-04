@@ -348,7 +348,7 @@ describe MultiparameterDateTime do
 
           context "when the date format is set" do
             before do
-              MultiparameterDateTime.date_format = '%-m-%-e-%y'
+              MultiparameterDateTime.date_format = '%-m-%-e-%0y'
             end
 
             it "should format the date properly" do

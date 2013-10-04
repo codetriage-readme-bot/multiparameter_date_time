@@ -63,8 +63,8 @@ record.publish_at_time_part #=> '09:30 am'
 In config/initializers/multiparameter\_date\_time.rb:
 
 ```ruby
-MultiparameterDateTime.date_format = '%-m/%-d/%Y'
-MultiparameterDateTime.time_format = '%-I:%M %P'
+MultiparameterDateTime.date_format = '%-m/%-d/%0Y'
+MultiparameterDateTime.time_format = '%-I:%0M %P'
 ```
 
 ### Validating the multipart date time data
