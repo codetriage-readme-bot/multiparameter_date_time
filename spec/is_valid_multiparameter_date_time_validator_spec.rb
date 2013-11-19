@@ -156,6 +156,36 @@ describe IsValidMultiparameterDateTimeValidator do
       end
     end
 
+    context "with a date that has invalid format" do
+      context "with year has 5 digits" do
+        let(:date_string) { '1/1/12012' }
+        let(:time_string) { '12:31pm' }
+
+        it_should_behave_like "a badly formatted date or time"
+      end
+
+      context "with year has 1 digit" do
+        let(:date_string) { '1/1/2' }
+        let(:time_string) { '12:31pm' }
+
+        it_should_behave_like "a badly formatted date or time"
+      end
+
+      context "with month has 3 digits" do
+        let(:date_string) { '100/1/2012' }
+        let(:time_string) { '12:31pm' }
+
+        it_should_behave_like "a badly formatted date or time"
+      end
+
+      context "with day has 3 digits" do
+        let(:date_string) { '10/100/2012' }
+        let(:time_string) { '12:31pm' }
+
+        it_should_behave_like "a badly formatted date or time"
+      end
+    end
+
     [' ', nil].each do |date_value|
       context "with date = #{date_value.inspect}" do
         let(:date_string) { date_value }
