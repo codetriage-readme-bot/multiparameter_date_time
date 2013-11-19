@@ -4,8 +4,7 @@ require 'is_valid_multiparameter_date_time_validator'
 
 module MultiparameterDateTime
   extend ActiveSupport::Concern
-
-  VALID_DATE_FORMAT = /\A((\d{1,2}[\/\-.]\d{1,2}[\/\-.]\d{2,4})|(\d{4}-\d{1,2}-\d{1,2}))/
+  VALID_DATE_FORMAT = /\A((\d{1,2}[\/\-.]\d{1,2}[\/\-.]\d{2,4})\z|(\d{4}-\d{1,2}-\d{1,2})\z)/
   VALID_STANDARD_TIME_FORMAT = /\A[0]*([1-9]|1[0-2]):\d{2}(:\d{2})?\s*([apAP][mM])?\s*([A-Z]{3,5})?\Z/
   VALID_MILITARY_TIME_FORMAT = /\A[0]*([0-9]|1[0-9]|2[0-3]):\d{2}(:\d{2})?\s*([A-Z]{3,5})?\Z/
 
