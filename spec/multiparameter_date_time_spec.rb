@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 require 'multiparameter_date_time'
-require 'informal'
 require 'active_support/core_ext/time/zones'
 
 describe MultiparameterDateTime do
@@ -21,7 +20,7 @@ describe MultiparameterDateTime do
   end
 
   class ActiveModelWithDateTime
-    include Informal::Model
+    include ActiveModel::Model
     attr_accessor :foo
     include MultiparameterDateTime
     multiparameter_date_time :foo
@@ -267,11 +266,11 @@ describe MultiparameterDateTime do
             end
 
             it "sets the attribute to a DateTime object" do
-              subject.foo.should == Time.zone.parse('01/01/2000 12:30pm')
+              subject.foo.should == Time.zone.parse('1/1/2000 12:30pm')
             end
 
             it "has the original date" do
-              subject.foo_date_part.should == '01/01/2000'
+              subject.foo_date_part.should == '1/1/2000'
             end
 
             it "has the original time" do

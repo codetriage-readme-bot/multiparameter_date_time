@@ -33,7 +33,15 @@ module MultiparameterDateTime
       time_part_setter = :"#{time_attribute}="
 
       define_method "#{attribute_name}=" do |date_time_input|
-        date_time_input = date_time_input.to_time_in_current_zone if date_time_input.respond_to?(:to_time_in_current_zone)
+        begin
+          if date_time_input.respond_to?(:in_time_zone)
+            date_time_input = date_time_input.in_time_zone
+          elsif date_time_input.respond_to?(:to_time_in_current_zone)
+            date_time_input = date_time_input.to_time_in_current_zone
+          end
+        rescue ArgumentError
+        end
+
         if date_time_input.is_a?(String)
           iso8601 = Time.iso8601(date_time_input).in_time_zone(Time.zone) rescue nil
           if iso8601
