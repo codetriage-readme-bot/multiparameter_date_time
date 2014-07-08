@@ -42,12 +42,20 @@ module MultiparameterDateTime
           end
           write_attribute_for_multiparameter_date_time(attribute_name, date_time_input)
         when String
-          iso8601 = Time.iso8601(date_time_input).in_time_zone(Time.zone) rescue nil
+          iso8601 = begin
+                      Time.iso8601(date_time_input).in_time_zone
+                    rescue ArgumentError
+                      nil
+                    end
           if iso8601
             write_attribute_for_multiparameter_date_time(attribute_name, iso8601)
           else
             date_part, time_part = date_time_input.split(' ', 2)
-            parsed_date_part = Date.parse(date_part) rescue nil
+            parsed_date_part = begin
+                                 Date.parse(date_part)
+                               rescue ArgumentError
+                                 nil
+                               end
             if time_part.nil? && parsed_date_part
               write_attribute_for_multiparameter_date_time(
                 attribute_name,
