@@ -1,4 +1,5 @@
 require 'active_support/concern'
+require 'active_support/core_ext/time/zones'
 require 'american_date'
 require 'is_valid_multiparameter_date_time_validator'
 
@@ -35,11 +36,9 @@ module MultiparameterDateTime
       define_method "#{attribute_name}=" do |date_time_input|
         case date_time_input
         when Date, Time, DateTime
-          if date_time_input.respond_to?(:in_time_zone)
-            begin
-              date_time_input = date_time_input.in_time_zone
-            rescue ArgumentError
-            end
+          begin
+            date_time_input = date_time_input.in_time_zone
+          rescue ArgumentError
           end
           write_attribute_for_multiparameter_date_time(attribute_name, date_time_input)
         when String

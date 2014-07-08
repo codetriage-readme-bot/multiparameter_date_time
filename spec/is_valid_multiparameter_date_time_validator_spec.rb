@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 require 'multiparameter_date_time'
-require 'active_support/core_ext/time/zones'
 require 'is_valid_multiparameter_date_time_validator'
 
 describe IsValidMultiparameterDateTimeValidator do
