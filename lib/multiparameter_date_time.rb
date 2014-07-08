@@ -33,12 +33,16 @@ module MultiparameterDateTime
       time_part_setter = :"#{time_attribute}="
 
       define_method "#{attribute_name}=" do |date_time_input|
-        begin
-          date_time_input = date_time_input.in_time_zone
-        rescue ArgumentError
-        end
-
-        if date_time_input.is_a?(String)
+        case date_time_input
+        when Date, Time, DateTime
+          if date_time_input.respond_to?(:in_time_zone)
+            begin
+              date_time_input = date_time_input.in_time_zone
+            rescue ArgumentError
+            end
+          end
+          write_attribute_for_multiparameter_date_time(attribute_name, date_time_input)
+        when String
           iso8601 = Time.iso8601(date_time_input).in_time_zone(Time.zone) rescue nil
           if iso8601
             write_attribute_for_multiparameter_date_time(attribute_name, iso8601)
@@ -54,8 +58,6 @@ module MultiparameterDateTime
               public_send(time_part_setter, time_part)
             end
           end
-        else
-          write_attribute_for_multiparameter_date_time(attribute_name, date_time_input)
         end
       end
 
