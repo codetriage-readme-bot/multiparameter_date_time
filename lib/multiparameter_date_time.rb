@@ -34,11 +34,7 @@ module MultiparameterDateTime
 
       define_method "#{attribute_name}=" do |date_time_input|
         begin
-          if date_time_input.respond_to?(:in_time_zone)
-            date_time_input = date_time_input.in_time_zone
-          elsif date_time_input.respond_to?(:to_time_in_current_zone)
-            date_time_input = date_time_input.to_time_in_current_zone
-          end
+          date_time_input = date_time_input.in_time_zone
         rescue ArgumentError
         end
 
@@ -52,7 +48,7 @@ module MultiparameterDateTime
             if time_part.nil? && parsed_date_part
               write_attribute_for_multiparameter_date_time(
                 attribute_name,
-                parsed_date_part.to_time_in_current_zone)
+                parsed_date_part.in_time_zone)
             else
               public_send(date_part_setter, date_part)
               public_send(time_part_setter, time_part)
