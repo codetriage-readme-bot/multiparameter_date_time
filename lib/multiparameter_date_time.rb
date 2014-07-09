@@ -52,7 +52,7 @@ module MultiparameterDateTime
           else
             date_part, time_part = date_time_input.split(' ', 2)
             parsed_date_part = begin
-                                 Date.parse(date_part)
+                                 date_part && Date.parse(date_part)
                                rescue ArgumentError
                                  nil
                                end
@@ -65,6 +65,8 @@ module MultiparameterDateTime
               public_send(time_part_setter, time_part)
             end
           end
+        else
+          super date_time_input
         end
       end
 

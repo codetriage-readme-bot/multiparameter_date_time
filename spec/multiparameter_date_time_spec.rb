@@ -342,6 +342,15 @@ describe MultiparameterDateTime do
           end
         end
 
+        describe "setting to nil" do
+          it "is nil" do
+            record = ModelWithDateTime.new
+            record.foo = Time.current
+            record.foo = nil
+            expect(record.foo).to eq nil
+          end
+        end
+
         describe "configuring the datetime format" do
           let(:record) { model.new(foo: Time.zone.parse('01/09/2000 1:30 pm')) }
 
