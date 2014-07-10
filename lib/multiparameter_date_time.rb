@@ -66,7 +66,7 @@ module MultiparameterDateTime
             end
           end
         else
-          super date_time_input
+          write_attribute_for_multiparameter_date_time(attribute_name, date_time_input)
         end
       end
 
