@@ -1,3 +1,5 @@
+require 'active_model/validator'
+
 class IsValidMultiparameterDateTimeValidator < ActiveModel::EachValidator
   def validate_each(record, attribute, value)
     date_value = record.public_send(:"#{attribute}_date_part")

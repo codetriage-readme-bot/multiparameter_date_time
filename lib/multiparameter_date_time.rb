@@ -1,4 +1,5 @@
 require 'active_support/concern'
+require 'active_support/core_ext/module/attribute_accessors'
 require 'active_support/core_ext/time/zones'
 require 'american_date'
 require 'is_valid_multiparameter_date_time_validator'
