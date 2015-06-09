@@ -42,8 +42,13 @@ describe MultiparameterDateTime do
 
         describe "when a value is present" do
           let(:record) { model.new(foo: Time.zone.parse('1/2/2003 04:05pm')) }
-          its(:foo_date_part) { should == '1/2/2003' }
-          its(:foo_time_part) { should == '4:05 pm' }
+          it 'assigns date_part' do
+            expect(subject.foo_date_part).to eq '1/2/2003'
+          end
+
+          it 'assigns time_part' do
+            expect(subject.foo_time_part).to eq '4:05 pm'
+          end
         end
 
         describe "setting a valid date and time" do
@@ -387,6 +392,44 @@ describe MultiparameterDateTime do
 
             after do
               MultiparameterDateTime.time_format = MultiparameterDateTime::DEFAULT_TIME_FORMAT
+            end
+          end
+        end
+
+        describe 'using a custom date string formatter' do
+          let(:foo_date_part) { '1/12/15' }
+          let(:foo_time_part) { '9:30 pm EST' }
+
+          context 'when the date string formatter is nil' do
+            it 'parses the unmodified date string' do
+              MultiparameterDateTime.date_string_formatter = nil
+              expect(Time.zone).to receive(:parse)
+                .with("#{foo_date_part} #{foo_time_part}")
+
+              model.new(foo_date_part: foo_date_part, foo_time_part: foo_time_part)
+            end
+          end
+
+          context 'when the date string formatter is present' do
+            before do
+              class TestFormatter
+                def self.format(date_string)
+                  '12/31/1995'
+                end
+              end
+
+              MultiparameterDateTime.date_string_formatter = TestFormatter
+            end
+
+            after do
+              MultiparameterDateTime.date_string_formatter = nil
+            end
+
+            it 'uses a formatted date string' do
+              expect(Time.zone).to receive(:parse)
+                .with("#{'12/31/1995'} #{foo_time_part}")
+
+              model.new(foo_date_part: foo_date_part, foo_time_part: foo_time_part)
             end
           end
         end

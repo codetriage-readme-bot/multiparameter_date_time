@@ -14,6 +14,7 @@ module MultiparameterDateTime
   DEFAULT_TIME_FORMAT = '%-I:%0M %P'
 
   mattr_writer :date_format, :time_format
+  mattr_accessor :date_string_formatter
 
   def self.date_format
     @@date_format ||= DEFAULT_DATE_FORMAT
@@ -111,8 +112,13 @@ module MultiparameterDateTime
   def set_combined_datetime(name, date_string, time_string)
     if date_string =~ MultiparameterDateTime::VALID_DATE_FORMAT && (time_string =~ MultiparameterDateTime::VALID_STANDARD_TIME_FORMAT || time_string =~ VALID_MILITARY_TIME_FORMAT)
       begin
+        formatted_date_string = date_string
+        if MultiparameterDateTime.date_string_formatter.present?
+          formatted_date_string = MultiparameterDateTime.date_string_formatter.format(date_string)
+        end
+
         write_attribute_for_multiparameter_date_time(
-          name, Time.zone.parse("#{date_string} #{time_string}")
+          name, Time.zone.parse("#{formatted_date_string} #{time_string}")
         )
       rescue ArgumentError
         write_attribute_for_multiparameter_date_time(name, :incomplete)
