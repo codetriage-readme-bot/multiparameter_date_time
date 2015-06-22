@@ -79,13 +79,32 @@ validates :published_at, presence: true, is_valid_multiparameter_date_time: true
 IsValidMultiparameterDateTimeValidator.invalid_format_error_message
 ```
 
-## Contributing
+### Contributing
 
 1. Fork it
 2. Create your feature branch (`git checkout -b my-new-feature`)
 3. Commit your changes (`git commit -am 'Added some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create new Pull Request
+
+### Customizing the error message via I18n
+
+This gem supports custom error messages using the I18n gem. There is one message key
+for a missing date part and another for a missing time part. Default messages are
+provided if you choose not to supply your own.
+
+```yaml
+en:
+  activerecord:
+    errors:
+      models:
+        <your_model>:
+          attributes:
+            ended_at_time_part:
+              blank: '<your message>'
+            ended_at_date_part:
+              blank: '<your message>'
+```
 
 ## License
 

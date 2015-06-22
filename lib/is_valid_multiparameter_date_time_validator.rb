@@ -10,9 +10,13 @@ class IsValidMultiparameterDateTimeValidator < ActiveModel::EachValidator
     if date_invalid?(date_value) || time_invalid?(time_value)
       record.errors.add(attribute, self.class.invalid_format_error_message)
     elsif date_value.blank?
-      record.errors.add(attribute, 'Please enter a date.')
+      key = :"#{attribute}_date_part"
+      message = record.errors.generate_message(key, :blank, default: 'Please enter a date.')
+      record.errors.add(attribute, message)
     elsif time_value.blank?
-      record.errors.add(attribute, 'Please enter a time.')
+      key = :"#{attribute}_time_part"
+      message = record.errors.generate_message(key, :blank, default: 'Please enter a time.')
+      record.errors.add(attribute, message)
     else
       attribute_value = record.public_send(:"#{attribute}_time_part")
       begin
