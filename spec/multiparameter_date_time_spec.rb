@@ -60,15 +60,15 @@ describe MultiparameterDateTime do
           end
 
           it "sets the attribute to a DateTime object" do
-            subject.foo.should == Time.zone.parse('1/2/2000 9:30 pm')
+            expect(subject.foo).to eq Time.zone.parse('1/2/2000 9:30 pm')
           end
 
           it "has the original date input" do
-            subject.foo_date_part.should == '01/02/2000'
+            expect(subject.foo_date_part).to eq '01/02/2000'
           end
 
           it "has the original time input" do
-            subject.foo_time_part.should == '9:30 pm EST'
+            expect(subject.foo_time_part).to eq '9:30 pm EST'
           end
         end
 
@@ -81,15 +81,15 @@ describe MultiparameterDateTime do
           end
 
           it "sets the attribute to :incomplete" do
-            subject.foo.should == :incomplete
+            expect(subject.foo).to eq :incomplete
           end
 
           it "has the original date" do
-            subject.foo_date_part.should == 'bad input'
+            expect(subject.foo_date_part).to eq 'bad input'
           end
 
           it "has the original time input" do
-            subject.foo_time_part.should == '9:30 pm'
+            expect(subject.foo_time_part).to eq '9:30 pm'
           end
         end
 
@@ -102,15 +102,15 @@ describe MultiparameterDateTime do
           end
 
           it "sets the attribute to :incomplete" do
-            subject.foo.should == :incomplete
+            expect(subject.foo).to eq :incomplete
           end
 
           it "has the original date" do
-            subject.foo_date_part.should == '99/99/9999'
+            expect(subject.foo_date_part).to eq '99/99/9999'
           end
 
           it "has the original time" do
-            subject.foo_time_part.should == '12:30 pm'
+            expect(subject.foo_time_part).to eq '12:30 pm'
           end
         end
 
@@ -123,15 +123,15 @@ describe MultiparameterDateTime do
           end
 
           it "sets the attribute to :incomplete" do
-            subject.foo.should == :incomplete
+            expect(subject.foo).to eq :incomplete
           end
 
           it "has the original date input" do
-            subject.foo_date_part.should == '01/02/2000'
+            expect(subject.foo_date_part).to eq '01/02/2000'
           end
 
           it "has the original time input" do
-            subject.foo_time_part.should == "bad input"
+            expect(subject.foo_time_part).to eq "bad input"
           end
         end
 
@@ -144,15 +144,15 @@ describe MultiparameterDateTime do
           end
 
           it "sets the attribute to :incomplete" do
-            subject.foo.should == :incomplete
+            expect(subject.foo).to eq :incomplete
           end
 
           it "has the original date input" do
-            subject.foo_date_part.should == '01/02/2000'
+            expect(subject.foo_date_part).to eq '01/02/2000'
           end
 
           it "has the original time input" do
-            subject.foo_time_part.should == '99:99pm'
+            expect(subject.foo_time_part).to eq '99:99pm'
           end
         end
 
@@ -164,15 +164,15 @@ describe MultiparameterDateTime do
           end
 
           it "sets the attribute to :incomplete" do
-            subject.foo.should == :incomplete
+            expect(subject.foo).to eq :incomplete
           end
 
           it "has the original date" do
-            subject.foo_date_part.should == '01/01/2000'
+            expect(subject.foo_date_part).to eq '01/01/2000'
           end
 
           it "has the nil for the time input" do
-            subject.foo_time_part.should == nil
+            expect(subject.foo_time_part).to eq nil
           end
         end
 
@@ -184,15 +184,15 @@ describe MultiparameterDateTime do
           end
 
           it "sets the attribute to :incomplete" do
-            subject.foo.should == :incomplete
+            expect(subject.foo).to eq :incomplete
           end
 
           it "has the nil for the date input" do
-            subject.foo_date_part.should == nil
+            expect(subject.foo_date_part).to eq nil
           end
 
           it "has the original time" do
-            subject.foo_time_part.should == '12:30 pm'
+            expect(subject.foo_time_part).to eq '12:30 pm'
           end
         end
 
@@ -205,15 +205,15 @@ describe MultiparameterDateTime do
           end
 
           it "sets the attribute to :incomplete" do
-            subject.foo.should == :incomplete
+            expect(subject.foo).to eq :incomplete
           end
 
           it "has the original date" do
-            subject.foo_date_part.should == 'asdf'
+            expect(subject.foo_date_part).to eq 'asdf'
           end
 
           it "has the original time input" do
-            subject.foo_time_part.should == 'qwer'
+            expect(subject.foo_time_part).to eq 'qwer'
           end
         end
 
@@ -226,15 +226,15 @@ describe MultiparameterDateTime do
           end
 
           it "has nil for the attribute" do
-            subject.foo.should == nil
+            expect(subject.foo).to eq nil
           end
 
           it "has the original date" do
-            subject.foo_date_part.should == ''
+            expect(subject.foo_date_part).to eq ''
           end
 
           it "has the original time input" do
-            subject.foo_time_part.should == ''
+            expect(subject.foo_time_part).to eq ''
           end
         end
 
@@ -248,15 +248,15 @@ describe MultiparameterDateTime do
           end
 
           it "sets the attribute to a DateTime object" do
-            subject.foo.should == Time.zone.parse('01/02/2000 12:30 pm')
+            expect(subject.foo).to eq Time.zone.parse('01/02/2000 12:30 pm')
           end
 
           it "has the original date" do
-            subject.foo_date_part.should == '1/2/2000'
+            expect(subject.foo_date_part).to eq '1/2/2000'
           end
 
           it "has the original time input" do
-            subject.foo_time_part.should == '12:30 pm'
+            expect(subject.foo_time_part).to eq '12:30 pm'
           end
         end
 
@@ -271,15 +271,15 @@ describe MultiparameterDateTime do
             end
 
             it "sets the attribute to a DateTime object" do
-              subject.foo.should == Time.zone.parse('01/01/2000 12:30pm')
+              expect(subject.foo).to eq Time.zone.parse('01/01/2000 12:30pm')
             end
 
             it "has the original date" do
-              subject.foo_date_part.should == '01/01/2000'
+              expect(subject.foo_date_part).to eq '01/01/2000'
             end
 
             it "has the original time" do
-              subject.foo_time_part.should == '12:30 pm'
+              expect(subject.foo_time_part).to eq '12:30 pm'
             end
           end
 
@@ -291,15 +291,15 @@ describe MultiparameterDateTime do
             end
 
             it "sets the attribute to a DateTime object with the correct EST time" do
-              subject.foo.should == Time.zone.parse('12/2/2011 8:00 pm')
+              expect(subject.foo).to eq Time.zone.parse('12/2/2011 8:00 pm')
             end
 
             it "has a date" do
-              subject.foo_date_part.should == '12/2/2011'
+              expect(subject.foo_date_part).to eq '12/2/2011'
             end
 
             it "has a time" do
-              subject.foo_time_part.should == '8:00 pm'
+              expect(subject.foo_time_part).to eq '8:00 pm'
             end
           end
 
@@ -312,15 +312,15 @@ describe MultiparameterDateTime do
             end
 
             it "sets the attribute to a DateTime object" do
-              subject.foo.should == Time.zone.parse('01/01/2000 12:00am')
+              expect(subject.foo).to eq Time.zone.parse('01/01/2000 12:00am')
             end
 
             it "has the original date" do
-              subject.foo_date_part.should == '1/1/2000'
+              expect(subject.foo_date_part).to eq '1/1/2000'
             end
 
             it "has midnight for the time input" do
-              subject.foo_time_part.should == '12:00 am'
+              expect(subject.foo_time_part).to eq '12:00 am'
             end
           end
         end
@@ -335,15 +335,15 @@ describe MultiparameterDateTime do
           end
 
           it "sets the attribute to a DateTime object in the current time zone" do
-            subject.foo.should == Time.zone.parse('01/01/2000 12:00 am')
+            expect(subject.foo).to eq Time.zone.parse('01/01/2000 12:00 am')
           end
 
           it "has the original date" do
-            subject.foo_date_part.should == '1/1/2000'
+            expect(subject.foo_date_part).to eq '1/1/2000'
           end
 
           it "has midnight for the time input" do
-            subject.foo_time_part.should == '12:00 am'
+            expect(subject.foo_time_part).to eq '12:00 am'
           end
         end
 
@@ -364,12 +364,12 @@ describe MultiparameterDateTime do
               MultiparameterDateTime.date_format = '%-m-%-e-%0y'
             end
 
-            it "should format the date properly" do
-              subject.foo_date_part.should == '1-9-00'
+            it "formats the date properly" do
+              expect(subject.foo_date_part).to eq '1-9-00'
             end
 
-            it "should use the default format for the time" do
-              subject.foo_time_part.should == '1:30 pm'
+            it "uses the default format for the time" do
+              expect(subject.foo_time_part).to eq '1:30 pm'
             end
 
             after do
@@ -382,12 +382,12 @@ describe MultiparameterDateTime do
               MultiparameterDateTime.time_format = '%H%M hours'
             end
 
-            it "should format the time properly" do
-              subject.foo_time_part.should == '1330 hours'
+            it "formats the time properly" do
+              expect(subject.foo_time_part).to eq '1330 hours'
             end
 
-            it "should use the default format for the date" do
-              subject.foo_date_part.should == '1/9/2000'
+            it "uses the default format for the date" do
+              expect(subject.foo_date_part).to eq '1/9/2000'
             end
 
             after do

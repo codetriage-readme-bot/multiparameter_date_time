@@ -21,16 +21,16 @@ describe IsValidMultiparameterDateTimeValidator do
   end
 
   shared_examples_for "a valid time" do
-    it "should not have an error" do
+    it "does not have an error" do
       record.valid?
-      record.errors[:foo].should be_empty
+      expect(record.errors[:foo]).to be_empty
     end
   end
 
   shared_examples_for "a badly formatted date or time" do
-    it "should show the bad format error" do
+    it "shows the bad format error" do
       record.valid?
-      record.errors[:foo].should == [bad_format_error]
+      expect(record.errors[:foo]).to eq [bad_format_error]
     end
   end
 
@@ -220,7 +220,7 @@ describe IsValidMultiparameterDateTimeValidator do
 
           it "should show the missing date error" do
             record.valid?
-            record.errors[:foo].should == [missing_date_error]
+            expect(record.errors[:foo]).to eq [missing_date_error]
           end
         end
 
@@ -235,7 +235,7 @@ describe IsValidMultiparameterDateTimeValidator do
             let(:time_string) { time_value }
             it 'should not have an error' do
               record.valid?
-              record.errors[:foo].should be_empty
+              expect(record.errors[:foo]).to be_empty
             end
           end
         end
@@ -262,7 +262,7 @@ describe IsValidMultiparameterDateTimeValidator do
         context 'and I18n error messages' do
           it "should show the missing date error" do
             record.valid?
-            record.errors[:foo].should == ['custom error']
+            expect(record.errors[:foo]).to eq ['custom error']
           end
         end
       end
@@ -272,7 +272,7 @@ describe IsValidMultiparameterDateTimeValidator do
       let(:record) { ModelWithDatetime.new(foo: Time.current) }
       it "should not have an error" do
         record.valid?
-        record.errors[:foo].should be_empty
+        expect(record.errors[:foo]).to be_empty
       end
     end
 
@@ -280,7 +280,7 @@ describe IsValidMultiparameterDateTimeValidator do
       let(:record) { ModelWithDatetime.new(foo: nil) }
       it "should not have an error" do
         record.valid?
-        record.errors[:foo].should be_empty
+        expect(record.errors[:foo]).to be_empty
       end
     end
 
@@ -288,7 +288,7 @@ describe IsValidMultiparameterDateTimeValidator do
       let(:record) { ModelWithDatetime.new }
       it "should not have an error" do
         record.valid?
-        record.errors[:foo].should be_empty
+        expect(record.errors[:foo]).to be_empty
       end
     end
 
@@ -337,9 +337,9 @@ describe IsValidMultiparameterDateTimeValidator do
           MultiparameterDateTime.date_format = '%-m-%-e-%0y'
         end
 
-        it "should show the bad format error" do
+        it "shows the bad format error" do
           record.valid?
-          record.errors[:foo].should == [
+          expect(record.errors[:foo]).to eq [
             'Please enter a valid date and time using the following formats: 1-29-00, 5:15 pm'
           ]
         end
@@ -356,9 +356,9 @@ describe IsValidMultiparameterDateTimeValidator do
           MultiparameterDateTime.time_format = '%H%M hours'
         end
 
-        it "should show the bad format error" do
+        it "shows the bad format error" do
           record.valid?
-          record.errors[:foo].should == [
+          expect(record.errors[:foo]).to eq [
             'Please enter a valid date and time using the following formats: 1/29/2000, 1715 hours'
           ]
         end
@@ -379,8 +379,8 @@ describe IsValidMultiparameterDateTimeValidator do
           ModelWithDatetime.new(foo_date_part: date_string, foo_time_part: time_string)
         end
 
-        it "should be accepted" do
-          record.should be_valid
+        it "is accepted" do
+          expect(record).to be_valid
         end
       end
     end
