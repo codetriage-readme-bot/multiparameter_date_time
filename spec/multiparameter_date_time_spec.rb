@@ -91,9 +91,30 @@ describe MultiparameterDateTime do
           it 'has the original time input' do
             expect(subject.foo_time_part).to eq '9:30 pm'
           end
+
+          context 'valid month but invalid day for the month' do
+            let(:foo_date_part) { '2/31/2015' }
+            let(:foo_time_part) { '9:30 pm' }
+
+            it 'does not raise an exception' do
+              expect { subject }.not_to raise_exception
+            end
+
+            it 'sets the attribute to :incomplete' do
+              expect(subject.foo).to eq :incomplete
+            end
+
+            it 'has the original date' do
+              expect(subject.foo_date_part).to eq '2/31/2015'
+            end
+
+            it 'has the original time input' do
+              expect(subject.foo_time_part).to eq '9:30 pm'
+            end
+          end
         end
 
-        describe 'setting a impossible date' do
+        describe 'setting an impossible date' do
           let(:foo_date_part) { '99/99/9999' }
           let(:foo_time_part) { '12:30 pm' }
 

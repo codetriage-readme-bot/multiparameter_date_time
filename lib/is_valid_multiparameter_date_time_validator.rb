@@ -20,6 +20,7 @@ class IsValidMultiparameterDateTimeValidator < ActiveModel::EachValidator
     else
       attribute_value = record.public_send(:"#{attribute}_time_part")
       begin
+        Date.parse(date_value)
         Time.zone.parse("#{date_value} #{time_value}")
         Time.zone.parse(attribute_value)
       rescue ArgumentError
