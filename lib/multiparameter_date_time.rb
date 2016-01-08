@@ -117,6 +117,7 @@ module MultiparameterDateTime
           formatted_date_string = MultiparameterDateTime.date_string_formatter.format(date_string)
         end
 
+        Date.parse(formatted_date_string)
         write_attribute_for_multiparameter_date_time(
           name, Time.zone.parse("#{formatted_date_string} #{time_string}")
         )

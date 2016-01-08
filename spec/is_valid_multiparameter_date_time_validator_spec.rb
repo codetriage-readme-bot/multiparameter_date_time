@@ -308,6 +308,24 @@ describe IsValidMultiparameterDateTimeValidator do
 
         it_should_behave_like 'a badly formatted date or time'
       end
+
+      context 'having a valid month but invalid day for that month' do
+        context 'set in parts' do
+          let(:record) do
+            ModelWithDatetime.new(foo_date_part: '2/31/2015', foo_time_part: '04:50pm')
+          end
+
+          it_should_behave_like 'a badly formatted date or time'
+        end
+
+        context 'set directly' do
+          let(:record) do
+            ModelWithDatetime.new(foo: '2/31/2015 04:50pm')
+          end
+
+          it_should_behave_like 'a badly formatted date or time'
+        end
+      end
     end
 
     context 'with an impossible time' do
