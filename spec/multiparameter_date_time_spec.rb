@@ -40,7 +40,7 @@ describe MultiparameterDateTime do
 
         subject { record }
 
-        describe "when a value is present" do
+        describe 'when a value is present' do
           let(:record) { model.new(foo: Time.zone.parse('1/2/2003 04:05pm')) }
           it 'assigns date_part' do
             expect(subject.foo_date_part).to eq '1/2/2003'
@@ -51,304 +51,304 @@ describe MultiparameterDateTime do
           end
         end
 
-        describe "setting a valid date and time" do
+        describe 'setting a valid date and time' do
           let(:foo_date_part) { '01/02/2000' }
           let(:foo_time_part) { '9:30 pm EST' }
 
-          it "doesn't raise an exception" do
+          it 'does not raise an exception' do
             expect { subject }.not_to raise_exception
           end
 
-          it "sets the attribute to a DateTime object" do
+          it 'sets the attribute to a DateTime object' do
             expect(subject.foo).to eq Time.zone.parse('1/2/2000 9:30 pm')
           end
 
-          it "has the original date input" do
+          it 'has the original date input' do
             expect(subject.foo_date_part).to eq '01/02/2000'
           end
 
-          it "has the original time input" do
+          it 'has the original time input' do
             expect(subject.foo_time_part).to eq '9:30 pm EST'
           end
         end
 
-        describe "setting an invalid date" do
+        describe 'setting an invalid date' do
           let(:foo_date_part) { 'bad input' }
           let(:foo_time_part) { '9:30 pm' }
 
-          it "doesn't raise an exception" do
+          it 'does not raise an exception' do
             expect { subject }.not_to raise_exception
           end
 
-          it "sets the attribute to :incomplete" do
+          it 'sets the attribute to :incomplete' do
             expect(subject.foo).to eq :incomplete
           end
 
-          it "has the original date" do
+          it 'has the original date' do
             expect(subject.foo_date_part).to eq 'bad input'
           end
 
-          it "has the original time input" do
+          it 'has the original time input' do
             expect(subject.foo_time_part).to eq '9:30 pm'
           end
         end
 
-        describe "setting a impossible date" do
+        describe 'setting a impossible date' do
           let(:foo_date_part) { '99/99/9999' }
           let(:foo_time_part) { '12:30 pm' }
 
-          it "doesn't raise an exception" do
+          it 'does not raise an exception' do
             expect { subject }.not_to raise_exception
           end
 
-          it "sets the attribute to :incomplete" do
+          it 'sets the attribute to :incomplete' do
             expect(subject.foo).to eq :incomplete
           end
 
-          it "has the original date" do
+          it 'has the original date' do
             expect(subject.foo_date_part).to eq '99/99/9999'
           end
 
-          it "has the original time" do
+          it 'has the original time' do
             expect(subject.foo_time_part).to eq '12:30 pm'
           end
         end
 
-        describe "setting an invalid time" do
+        describe 'setting an invalid time' do
           let(:foo_date_part) { '01/02/2000' }
           let(:foo_time_part) { 'bad input' }
 
-          it "doesn't raise an exception" do
+          it 'does not raise an exception' do
             expect { subject }.not_to raise_exception
           end
 
-          it "sets the attribute to :incomplete" do
+          it 'sets the attribute to :incomplete' do
             expect(subject.foo).to eq :incomplete
           end
 
-          it "has the original date input" do
+          it 'has the original date input' do
             expect(subject.foo_date_part).to eq '01/02/2000'
           end
 
-          it "has the original time input" do
-            expect(subject.foo_time_part).to eq "bad input"
+          it 'has the original time input' do
+            expect(subject.foo_time_part).to eq 'bad input'
           end
         end
 
-        describe "setting a impossible time" do
+        describe 'setting a impossible time' do
           let(:foo_date_part) { '01/02/2000' }
           let(:foo_time_part) { '99:99pm' }
 
-          it "doesn't raise an exception" do
+          it 'does not raise an exception' do
             expect { subject }.not_to raise_exception
           end
 
-          it "sets the attribute to :incomplete" do
+          it 'sets the attribute to :incomplete' do
             expect(subject.foo).to eq :incomplete
           end
 
-          it "has the original date input" do
+          it 'has the original date input' do
             expect(subject.foo_date_part).to eq '01/02/2000'
           end
 
-          it "has the original time input" do
+          it 'has the original time input' do
             expect(subject.foo_time_part).to eq '99:99pm'
           end
         end
 
-        describe "setting a date but not a time" do
+        describe 'setting a date but not a time' do
           let(:record) { model.new(foo_date_part: '01/01/2000') }
 
-          it "doesn't raise an exception" do
+          it 'does not raise an exception' do
             expect { subject }.not_to raise_exception
           end
 
-          it "sets the attribute to :incomplete" do
+          it 'sets the attribute to :incomplete' do
             expect(subject.foo).to eq :incomplete
           end
 
-          it "has the original date" do
+          it 'has the original date' do
             expect(subject.foo_date_part).to eq '01/01/2000'
           end
 
-          it "has the nil for the time input" do
+          it 'has the nil for the time input' do
             expect(subject.foo_time_part).to eq nil
           end
         end
 
-        describe "setting a time but not a date" do
+        describe 'setting a time but not a date' do
           let(:record) { model.new(foo_time_part: '12:30 pm') }
 
-          it "doesn't raise an exception" do
+          it 'does not raise an exception' do
             expect { subject }.not_to raise_exception
           end
 
-          it "sets the attribute to :incomplete" do
+          it 'sets the attribute to :incomplete' do
             expect(subject.foo).to eq :incomplete
           end
 
-          it "has the nil for the date input" do
+          it 'has the nil for the date input' do
             expect(subject.foo_date_part).to eq nil
           end
 
-          it "has the original time" do
+          it 'has the original time' do
             expect(subject.foo_time_part).to eq '12:30 pm'
           end
         end
 
-        describe "setting incorrect time and date" do
+        describe 'setting incorrect time and date' do
           let(:record) { model.new(foo_time_part: 'qwer',
                                    foo_date_part: 'asdf') }
 
-          it "doesn't raise an exception" do
+          it 'does not raise an exception' do
             expect { subject }.not_to raise_exception
           end
 
-          it "sets the attribute to :incomplete" do
+          it 'sets the attribute to :incomplete' do
             expect(subject.foo).to eq :incomplete
           end
 
-          it "has the original date" do
+          it 'has the original date' do
             expect(subject.foo_date_part).to eq 'asdf'
           end
 
-          it "has the original time input" do
+          it 'has the original time input' do
             expect(subject.foo_time_part).to eq 'qwer'
           end
         end
 
-        describe "setting neither time nor a date" do
+        describe 'setting neither time nor a date' do
           let(:record) { model.new(foo_time_part: '',
                                    foo_date_part: '') }
 
-          it "doesn't raise an exception" do
+          it 'does not raise an exception' do
             expect { subject }.not_to raise_exception
           end
 
-          it "has nil for the attribute" do
+          it 'has nil for the attribute' do
             expect(subject.foo).to eq nil
           end
 
-          it "has the original date" do
+          it 'has the original date' do
             expect(subject.foo_date_part).to eq ''
           end
 
-          it "has the original time input" do
+          it 'has the original time input' do
             expect(subject.foo_time_part).to eq ''
           end
         end
 
-        describe "setting a DateTime directly" do
+        describe 'setting a DateTime directly' do
           let(:record) { model.new(foo: Time.zone.parse("#{foo_date_part} #{foo_time_part}")) }
           let(:foo_date_part) { '01/02/2000' }
           let(:foo_time_part) { '12:30 pm' }
 
-          it "doesn't raise an exception" do
+          it 'does not raise an exception' do
             expect { subject }.not_to raise_exception
           end
 
-          it "sets the attribute to a DateTime object" do
+          it 'sets the attribute to a DateTime object' do
             expect(subject.foo).to eq Time.zone.parse('01/02/2000 12:30 pm')
           end
 
-          it "has the original date" do
+          it 'has the original date' do
             expect(subject.foo_date_part).to eq '1/2/2000'
           end
 
-          it "has the original time input" do
+          it 'has the original time input' do
             expect(subject.foo_time_part).to eq '12:30 pm'
           end
         end
 
-        describe "setting a String directly" do
-          context "When the string contains a date and time" do
+        describe 'setting a String directly' do
+          context 'When the string contains a date and time' do
             let(:record) { model.new(foo: "#{foo_date_part} #{foo_time_part}") }
             let(:foo_date_part) { '01/01/2000' }
             let(:foo_time_part) { '12:30 pm' }
 
-            it "doesn't raise an exception" do
+            it 'does not raise an exception' do
               expect { subject }.not_to raise_exception
             end
 
-            it "sets the attribute to a DateTime object" do
+            it 'sets the attribute to a DateTime object' do
               expect(subject.foo).to eq Time.zone.parse('01/01/2000 12:30pm')
             end
 
-            it "has the original date" do
+            it 'has the original date' do
               expect(subject.foo_date_part).to eq '01/01/2000'
             end
 
-            it "has the original time" do
+            it 'has the original time' do
               expect(subject.foo_time_part).to eq '12:30 pm'
             end
           end
 
-          context "When the string contains an iso8601 datetime" do
+          context 'When the string contains an iso8601 datetime' do
             let(:record) { model.new(foo: '2011-12-03T01:00:00Z') }
 
-            it "doesn't raise an exception" do
+            it 'does not raise an exception' do
               expect { subject }.not_to raise_exception
             end
 
-            it "sets the attribute to a DateTime object with the correct EST time" do
+            it 'sets the attribute to a DateTime object with the correct EST time' do
               expect(subject.foo).to eq Time.zone.parse('12/2/2011 8:00 pm')
             end
 
-            it "has a date" do
+            it 'has a date' do
               expect(subject.foo_date_part).to eq '12/2/2011'
             end
 
-            it "has a time" do
+            it 'has a time' do
               expect(subject.foo_time_part).to eq '8:00 pm'
             end
           end
 
-          context "When the string contains only a date" do
+          context 'When the string contains only a date' do
             let(:record) { model.new(foo: "#{foo_date_part}") }
             let(:foo_date_part) { '01/01/2000' }
 
-            it "doesn't raise an exception" do
+            it 'does not raise an exception' do
               expect { subject }.not_to raise_exception
             end
 
-            it "sets the attribute to a DateTime object" do
+            it 'sets the attribute to a DateTime object' do
               expect(subject.foo).to eq Time.zone.parse('01/01/2000 12:00am')
             end
 
-            it "has the original date" do
+            it 'has the original date' do
               expect(subject.foo_date_part).to eq '1/1/2000'
             end
 
-            it "has midnight for the time input" do
+            it 'has midnight for the time input' do
               expect(subject.foo_time_part).to eq '12:00 am'
             end
           end
         end
 
-        describe "setting a Date directly" do
+        describe 'setting a Date directly' do
           let(:record) { model.new(foo: Date.parse(foo_date_part)) }
 
           let(:foo_date_part) { '01/01/2000' }
 
-          it "doesn't raise an exception" do
+          it 'does not raise an exception' do
             expect { subject }.not_to raise_exception
           end
 
-          it "sets the attribute to a DateTime object in the current time zone" do
+          it 'sets the attribute to a DateTime object in the current time zone' do
             expect(subject.foo).to eq Time.zone.parse('01/01/2000 12:00 am')
           end
 
-          it "has the original date" do
+          it 'has the original date' do
             expect(subject.foo_date_part).to eq '1/1/2000'
           end
 
-          it "has midnight for the time input" do
+          it 'has midnight for the time input' do
             expect(subject.foo_time_part).to eq '12:00 am'
           end
         end
 
-        describe "setting to nil" do
-          it "is nil" do
+        describe 'setting to nil' do
+          it 'is nil' do
             record = ModelWithDateTime.new
             record.foo = Time.current
             record.foo = nil
@@ -356,19 +356,19 @@ describe MultiparameterDateTime do
           end
         end
 
-        describe "configuring the datetime format" do
+        describe 'configuring the datetime format' do
           let(:record) { model.new(foo: Time.zone.parse('01/09/2000 1:30 pm')) }
 
-          context "when the date format is set" do
+          context 'when the date format is set' do
             before do
               MultiparameterDateTime.date_format = '%-m-%-e-%0y'
             end
 
-            it "formats the date properly" do
+            it 'formats the date properly' do
               expect(subject.foo_date_part).to eq '1-9-00'
             end
 
-            it "uses the default format for the time" do
+            it 'uses the default format for the time' do
               expect(subject.foo_time_part).to eq '1:30 pm'
             end
 
@@ -377,16 +377,16 @@ describe MultiparameterDateTime do
             end
           end
 
-          context "when the time format is set" do
+          context 'when the time format is set' do
             before do
               MultiparameterDateTime.time_format = '%H%M hours'
             end
 
-            it "formats the time properly" do
+            it 'formats the time properly' do
               expect(subject.foo_time_part).to eq '1330 hours'
             end
 
-            it "uses the default format for the date" do
+            it 'uses the default format for the date' do
               expect(subject.foo_date_part).to eq '1/9/2000'
             end
 
