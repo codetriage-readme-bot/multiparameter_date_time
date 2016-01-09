@@ -21,7 +21,7 @@ Or install it yourself as:
 
     $ gem install multiparameter_date_time
 
-Note that Ruby 1.9.2+ is required.
+Note that Ruby 2.x is required.
 
 ## Usage
 
