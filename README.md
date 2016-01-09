@@ -108,4 +108,4 @@ en:
 
 ## License
 
-Copyright © 2012–2013 Case Commons, LLC. License is available in the LICENSE file.
+Copyright © 2012–2016 Case Commons, LLC. License is available in the LICENSE file.
