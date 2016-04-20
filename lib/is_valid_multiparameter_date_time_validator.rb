@@ -5,9 +5,12 @@ class IsValidMultiparameterDateTimeValidator < ActiveModel::EachValidator
     date_value = record.public_send(:"#{attribute}_date_part")
     time_value = record.public_send(:"#{attribute}_time_part")
 
-    return if date_value.blank? && time_value.blank?
+    return if !options[:required] && date_value.blank? && time_value.blank?
 
-    if date_invalid?(date_value) || time_invalid?(time_value)
+    if date_value.blank? && time_value.blank?
+      message = "Please enter a date and time for the #{record.class.name.titleize.downcase}."
+      record.errors.add(attribute, message)
+    elsif date_invalid?(date_value) || time_invalid?(time_value)
       record.errors.add(attribute, self.class.invalid_format_error_message)
     elsif date_value.blank?
       key = :"#{attribute}_date_part"
