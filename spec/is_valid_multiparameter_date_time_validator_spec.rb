@@ -16,7 +16,7 @@ describe IsValidMultiparameterDateTimeValidator do
     model do
       include MultiparameterDateTime
       multiparameter_date_time :foo
-      validates :foo, is_valid_multiparameter_date_time: true, allow_blank: true
+      validates :foo, is_valid_multiparameter_date_time: true
     end
   end
 
@@ -383,6 +383,52 @@ describe IsValidMultiparameterDateTimeValidator do
 
         after do
           MultiparameterDateTime.time_format = MultiparameterDateTime::DEFAULT_TIME_FORMAT
+        end
+      end
+    end
+
+    context 'parameter specifying whether the field is required' do
+      context 'when nothing is set at all and the value is not required' do
+        with_model :ModelWithDatetimeRequired do
+          table do |t|
+            t.datetime :foo
+          end
+
+          model do
+            include MultiparameterDateTime
+            multiparameter_date_time :foo
+            validates :foo, is_valid_multiparameter_date_time: { required: false }
+          end
+        end
+
+        let(:record) { ModelWithDatetimeRequired.new }
+
+        it 'should show the missing datetime error' do
+          record.valid?
+          expect(record.errors[:foo]).to be_empty
+        end
+      end
+
+      context 'when nothing is set at all and a value is required' do
+        with_model :ModelWithDatetimeRequired do
+          table do |t|
+            t.datetime :foo
+          end
+
+          model do
+            include MultiparameterDateTime
+            multiparameter_date_time :foo
+            validates :foo, is_valid_multiparameter_date_time: { required: true }
+          end
+        end
+
+        let(:record) { ModelWithDatetimeRequired.new }
+
+        it 'should show the missing datetime error' do
+          record.valid?
+          expect(record.errors[:foo]).to eq [
+            'Please enter a date and time for the model with datetime required.'
+          ]
         end
       end
     end
