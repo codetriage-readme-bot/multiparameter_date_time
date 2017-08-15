@@ -18,7 +18,7 @@ Gem::Specification.new do |gem|
   gem.required_ruby_version = '>= 1.9.2'
 
   gem.add_dependency 'american_date'
-  gem.add_dependency 'activesupport', '~> 4.0'
+  gem.add_dependency 'activesupport', '>= 4.0'
 
   gem.add_development_dependency 'activerecord'
   gem.add_development_dependency 'rspec', '~> 3'
