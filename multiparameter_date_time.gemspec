@@ -15,12 +15,12 @@ Gem::Specification.new do |gem|
   gem.version       = MultiparameterDateTime::VERSION
   gem.licenses      = 'MIT'
 
-  gem.required_ruby_version = '>= 1.9.2'
+  gem.required_ruby_version = '>= 2.1.0'
 
   gem.add_dependency 'american_date'
-  gem.add_dependency 'activesupport', '>= 4.0'
+  gem.add_dependency 'activesupport', '>= 4.2'
 
-  gem.add_development_dependency 'activerecord'
+  gem.add_development_dependency 'activerecord', '>= 4.2', '< 6.0'
   gem.add_development_dependency 'rake'
   gem.add_development_dependency 'rspec', '~> 3'
   gem.add_development_dependency 'sqlite3'
