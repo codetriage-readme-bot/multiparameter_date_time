@@ -3,7 +3,14 @@ source 'https://rubygems.org'
 # Specify your gem's dependencies in multiparameter_date_time.gemspec
 gemspec
 
-gem 'activerecord-jdbcsqlite3-adapter', :platforms => :jruby
-gem 'pry'
-gem 'rake'
-gem 'sqlite3', :platforms => :ruby
+ar_branch = ENV['ACTIVE_RECORD_BRANCH']
+ar_version = ENV['ACTIVE_RECORD_VERSION']
+
+if ar_branch
+  gem 'activerecord', git: 'https://github.com/rails/rails.git', branch: ar_branch
+  gem 'arel', git: 'https://github.com/rails/arel.git' if ar_branch == 'master'
+end
+
+if ar_version
+  gem 'activerecord', ar_version
+end
